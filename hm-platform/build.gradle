@@ -1,0 +1,83 @@
+// 配置运行构建脚本的要求
+buildscript {
+    // 设置自定义属性
+    ext {
+        springBootVersion = '2.2.9.RELEASE'
+    }
+    // 解决buildscript块中的依赖项时，检查Maven Central中的依赖项
+    repositories {
+        mavenCentral()
+    }
+    // 我们需要spring boot插件来运行构建脚本
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+configurations {
+    //定义
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+// 设置全局变量
+group = 'com.hm.platform'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+// 添加构建插件
+plugins {
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+
+// 用于搜索以解决项目依赖关系的仓库地址
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudAlibabaVersion', "2.2.1.RELEASE")
+}
+
+// 项目依赖
+dependencies {
+    //implementation()定义编译时所需的依赖项。此配置方法称为compile。
+    //testImplementation()并定义了仅用于测试（旧testCompile）所需的依赖项。
+    //runtimeOnly和testRuntimeOnly。这声明了运行时提供的不需要对其进行编译的依赖项。
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+
+    compile project(":hm-cms")
+}
+
+
+dependencyManagement {
+    imports {
+        mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+    }
+}
+test {
+    useJUnitPlatform()
+}
