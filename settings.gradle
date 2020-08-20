@@ -1,4 +1,3 @@
-//上下层级构建多项目
 rootProject.name = 'hm-platform'
 
 //hm-platform 下面有三个子项目，类似拆分微服务
