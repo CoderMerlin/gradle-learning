@@ -5,18 +5,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Merlin
- * @Title: WebApplication
+ * @Title: BusinessApplication
  * @ProjectName gradle-learning
  * @Description: TODO
- * @date 2020/8/2015:31
+ * @date 2020/8/2416:08
  */
+
 @SpringBootApplication
-public class WebApplication {
+public class BusinessApplication {
 
     //启动类
     public static void main(String[] args) {
 
-        SpringApplication.run(WebApplication.class, args);
+        SpringApplication.run(BusinessApplication.class, args);
     }
-
 }

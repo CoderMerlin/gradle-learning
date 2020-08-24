@@ -1,0 +1,20 @@
+// 添加构建插件 ,方式一
+
+dependencies {
+    //添加子模块
+    compile project(":hm-platform-common")
+    compile project(":hm-platform-business")
+    //引入servlet
+    //providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+}
+
+
+/*
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java','../hm-platform-common/src/main/java','../hm-platform-business/src/main/java']
+        }
+    }
+}
+*/

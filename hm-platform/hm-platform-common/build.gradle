@@ -1,0 +1,5 @@
+// jar包的名字
+archivesBaseName = 'hm-platform-common'
+
+//解决gradle 子项目引用其他项目类报错
+jar.enabled = true

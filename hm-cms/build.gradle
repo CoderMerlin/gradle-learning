@@ -1,13 +1,37 @@
-
-// 添加构建插件 ,方式一
-plugins {
-    id 'org.springframework.boot' version '2.2.9.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+// 配置运行构建脚本的要求
+buildscript {
+    // 设置自定义属性
+    ext {
+        springBootVersion = '2.2.9.RELEASE'
+    }
+    // 解决buildscript块中的依赖项时，检查Maven Central中的依赖项
+    repositories {
+        mavenCentral()
+    }
+    // 我们需要spring boot插件来运行构建脚本
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
-//添加插件，方式二
+// 添加构建插件 ,方式一
+//注意：plugins{}必须放在buildscript{}之后或者其他的plugins{}的后边，否则报错！
+//报错：
+//参考：https://www.jianshu.com/p/d9900c942071
 apply plugin: 'java'
-apply plugin: "idea"
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+/*plugins {
+    id 'java'
+    //报错：Error resolving plugin [id: 'org.springframework.boot', version: '2.2.9.RELEASE']
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+}*/
+
+//添加插件，方式二
+//apply plugin: 'java'
+//apply plugin: "idea"
 
 configurations {
     //定义

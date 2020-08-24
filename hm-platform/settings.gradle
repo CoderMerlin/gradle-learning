@@ -9,3 +9,4 @@ include 'hm-platform-common'
 //业务层代码
 include 'hm-platform-business'
 
+//includeFlat  'hm-cms'
